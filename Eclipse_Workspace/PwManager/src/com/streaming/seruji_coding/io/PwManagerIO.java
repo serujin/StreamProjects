@@ -17,4 +17,12 @@ public class PwManagerIO {
 	public String getStringFromUser(String msg) {
 		return JOptionPane.showInputDialog(msg);
 	}
+	
+	public void sayToUser(String msg) {
+		JOptionPane.showMessageDialog(null, msg);
+	}
+	
+	public void showError(String msg) {
+		JOptionPane.showMessageDialog(null, msg);
+	}
 }

@@ -1,16 +1,13 @@
 package com.streaming.seruji_coding.utils;
 
-import java.util.Random;
+import javax.swing.JOptionPane;
 
 import com.streaming.seruji_coding.constants.PwManagerConstants;
 
 public class PwManagerUtils {
 	private static PwManagerUtils instance;
-	private Random random;
 	
-	private PwManagerUtils() {
-		random = new Random();
-	}
+	private PwManagerUtils() {}
 	
 	public static PwManagerUtils getInstance() {
 		if(instance == null) {
@@ -19,27 +16,27 @@ public class PwManagerUtils {
 		return instance;
 	}
 	
-	public String getHashedPassword(String password) {
-		return getConvertedPassword(password);
+	public int showOptionsMenu(String message, String title, String[] options) {
+		return JOptionPane.showOptionDialog(null, message, title, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, PwManagerConstants.ERROR_CODE);
 	}
 	
-	private String getConvertedPassword(String password) {
-		StringBuilder builder = new StringBuilder();
-		for(int i = 0; i < password.length(); i++) {
-			builder.append(PwManagerConstants.HASH_SYMBOLS[i]);
-		}
-		return builder.toString();
-	}
- 	
-	private String getPasswordWithSymbols(String password) {
-		StringBuilder builder = new StringBuilder(password);
-		for(int i = password.length(); i < PwManagerConstants.PW_LENGTH; i++) {
-			builder.append(getRandomSymbol());
-		}
-		return builder.toString();
+	public boolean needToRegister() {
+		return false;
 	}
 	
-	private String getRandomSymbol() {
-		return PwManagerConstants.HASH_SYMBOLS[random.nextInt(PwManagerConstants.HASH_SYMBOLS.length)];
+	public boolean isAValidLogin(String username, String password) {
+		return isAValidString(username) && isAValidString(password);
+	}
+
+	public boolean isAValidString(String str) {
+		if(str == null) {
+			return false; //MAYBE CHANGE THIS TO WANT TO EXIT FROM THE PROGRAM
+		}
+		for(String toCheck : PwManagerConstants.INVALID_STRINGS) {
+			if(str.equals(toCheck)) {
+				return false;
+			}
+		}
+		return true;
 	}
 }

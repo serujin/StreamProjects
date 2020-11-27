@@ -1,14 +1,13 @@
 base de datos en postgresql
 conectar esa base de datos a pwmanager
 hashear contraseñas
-guardar las contraseñas hasheadas 
 
 
-1 tabla única
+
 id 
 url varchar(200)
 user varchar(50)
-hashedPw varchar(100)
+encryptedPw varchar(100)
 
 
 
