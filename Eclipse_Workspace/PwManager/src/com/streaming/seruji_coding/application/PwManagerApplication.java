@@ -15,9 +15,9 @@ public class PwManagerApplication {
 //		String user = PwManagerIO.getInstance().getStringFromUser("Inserta tu usuario en la página web");
 //		String password = PwManagerIO.getInstance().getStringFromUser("Inserta tu contraseña en la página web");
 //		PwAccount gmail = new PwAccount(url, user, password);
-//		PwEncrypter pw = new PwEncrypter("mandalena");
-//		System.out.println(pw.getEncryptedPw("contraseña"));
-//		System.out.println(pw.getDecryptedPw());
-		PwManagerController.getInstance().start();
+		PwEncrypter pw = new PwEncrypter("er_pepe");
+		System.out.println(pw.getEncryptedPw("aSDFADSdaldlakdw098098??"));
+		System.out.println(pw.getDecryptedPw());
+//		PwManagerController.getInstance().start();
 	}
 }

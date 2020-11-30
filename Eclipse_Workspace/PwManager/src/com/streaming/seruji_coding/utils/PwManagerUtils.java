@@ -1,34 +1,24 @@
 package com.streaming.seruji_coding.utils;
 
 import javax.swing.JOptionPane;
-
 import com.streaming.seruji_coding.constants.PwManagerConstants;
 
-public class PwManagerUtils {
-	private static PwManagerUtils instance;
-	
+public class PwManagerUtils {	
 	private PwManagerUtils() {}
 	
-	public static PwManagerUtils getInstance() {
-		if(instance == null) {
-			instance = new PwManagerUtils();
-		}
-		return instance;
-	}
-	
-	public int showOptionsMenu(String message, String title, String[] options) {
+	public static int showOptionsMenu(String message, String title, String[] options) {
 		return JOptionPane.showOptionDialog(null, message, title, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, PwManagerConstants.ERROR_CODE);
 	}
 	
-	public boolean needToRegister() {
+	public static boolean needToRegister() {
 		return false;
 	}
 	
-	public boolean isAValidLogin(String username, String password) {
-		return isAValidString(username) && isAValidString(password);
+	public static boolean isAValidLogin(String username, String password) {
+		return PwManagerUtils.isAValidString(username) && PwManagerUtils.isAValidString(password);
 	}
 
-	public boolean isAValidString(String str) {
+	public static boolean isAValidString(String str) {
 		if(str == null) {
 			return false; //MAYBE CHANGE THIS TO WANT TO EXIT FROM THE PROGRAM
 		}

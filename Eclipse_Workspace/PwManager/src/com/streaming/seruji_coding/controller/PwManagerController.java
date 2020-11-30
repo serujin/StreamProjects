@@ -5,16 +5,7 @@ import com.streaming.seruji_coding.io.PwManagerIO;
 import com.streaming.seruji_coding.utils.PwManagerUtils;
 
 public class PwManagerController {
-	private static PwManagerController instance;
-	
 	private PwManagerController() {};
-	
-	public static PwManagerController getInstance() {
-		if(instance == null) {
-			instance = new PwManagerController();
-		}
-		return instance;
-	}
 	
 	public void start() {
 		manageAccount();
@@ -22,14 +13,14 @@ public class PwManagerController {
 		stop();
 	}
 	
-	private void manageAccount() {
-		if(PwManagerUtils.getInstance().needToRegister()) {
+	private static void manageAccount() {
+		if(PwManagerUtils.needToRegister()) {
 			register();
 		}
 //		login();
 	}
 	
-	private void userInteraction() {
+	private static void userInteraction() {
 		int option = getUserAction();
 		while(option != PwManagerConstants.EXIT_OPTION) {
 			doAction(option);
@@ -37,33 +28,33 @@ public class PwManagerController {
 		}
 	}
 	
-	private void stop() {
-		PwManagerIO.getInstance().sayToUser(PwManagerConstants.TO_USER_MESSAGES[3]);
+	private static void stop() {
+		PwManagerIO.sayToUser(PwManagerConstants.TO_USER_MESSAGES[3]);
 	}
 	
-	private void register() {
-		String username = PwManagerIO.getInstance().getStringFromUser(PwManagerConstants.LOGIN_USER_MSG);
-		String password = PwManagerIO.getInstance().getStringFromUser(PwManagerConstants.LOGIN_PASS_MSG);
-		while(!PwManagerUtils.getInstance().isAValidLogin(username, password)) {
-			PwManagerIO.getInstance().showError(PwManagerConstants.POSSIBLE_ERRORS[0]);
-			username = PwManagerIO.getInstance().getStringFromUser(PwManagerConstants.LOGIN_USER_MSG);
-			password = PwManagerIO.getInstance().getStringFromUser(PwManagerConstants.LOGIN_PASS_MSG);
+	private static void register() {
+		String username = PwManagerIO.getStringFromUser(PwManagerConstants.LOGIN_USER_MSG);
+		String password = PwManagerIO.getStringFromUser(PwManagerConstants.LOGIN_PASS_MSG);
+		while(!PwManagerUtils.isAValidLogin(username, password)) {
+			PwManagerIO.showError(PwManagerConstants.POSSIBLE_ERRORS[0]);
+			username = PwManagerIO.getStringFromUser(PwManagerConstants.LOGIN_USER_MSG);
+			password = PwManagerIO.getStringFromUser(PwManagerConstants.LOGIN_PASS_MSG);
 		}
-		PwManagerIO.getInstance().sayToUser(PwManagerConstants.TO_USER_MESSAGES[0]);
+		PwManagerIO.sayToUser(PwManagerConstants.TO_USER_MESSAGES[0]);
 	}
 	
-	private void login() {
-		String username = PwManagerIO.getInstance().getStringFromUser(PwManagerConstants.LOGIN_USER_MSG);
-		String password = PwManagerIO.getInstance().getStringFromUser(PwManagerConstants.LOGIN_PASS_MSG);
-		while(!PwManagerUtils.getInstance().isAValidLogin(username, password)) {
-			PwManagerIO.getInstance().showError(PwManagerConstants.POSSIBLE_ERRORS[1]);
-			username = PwManagerIO.getInstance().getStringFromUser(PwManagerConstants.LOGIN_USER_MSG);
-			password = PwManagerIO.getInstance().getStringFromUser(PwManagerConstants.LOGIN_PASS_MSG);
+	private static void login() {
+		String username = PwManagerIO.getStringFromUser(PwManagerConstants.LOGIN_USER_MSG);
+		String password = PwManagerIO.getStringFromUser(PwManagerConstants.LOGIN_PASS_MSG);
+		while(!PwManagerUtils.isAValidLogin(username, password)) {
+			PwManagerIO.showError(PwManagerConstants.POSSIBLE_ERRORS[1]);
+			username = PwManagerIO.getStringFromUser(PwManagerConstants.LOGIN_USER_MSG);
+			password = PwManagerIO.getStringFromUser(PwManagerConstants.LOGIN_PASS_MSG);
 		}
-		PwManagerIO.getInstance().sayToUser(PwManagerConstants.TO_USER_MESSAGES[1]);
+		PwManagerIO.sayToUser(PwManagerConstants.TO_USER_MESSAGES[1]);
 	}
 	
-	private void doAction(int option) {
+	private static void doAction(int option) {
 		switch(option) {
 			case 0:
 				System.out.println("New password stored");
@@ -79,21 +70,21 @@ public class PwManagerController {
 		}
 	}
 	
-	private void storePassword() {
+	private static void storePassword() {
 		//TODO
 	}
 	
-	private void takePassword() {
+	private static void takePassword() {
 		//TODO
 	}
 	
-	private void logOut() {
+	private static void logOut() {
 		//DISCONNECT FROM USER
 		login();
 	}
 	
-	private int getUserAction() {
-		int option = PwManagerUtils.getInstance().showOptionsMenu(PwManagerConstants.TO_USER_MESSAGES[2], PwManagerConstants.OPTIONS_TITLE, PwManagerConstants.USER_ACTIONS);
+	private static int getUserAction() {
+		int option = PwManagerUtils.showOptionsMenu(PwManagerConstants.TO_USER_MESSAGES[2], PwManagerConstants.OPTIONS_TITLE, PwManagerConstants.USER_ACTIONS);
 		return option;
 	}
 }

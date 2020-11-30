@@ -32,30 +32,30 @@ public class PwEncrypter {
 	private String decrypt() {
 		StringBuilder builder = new StringBuilder();
 		for(int i = 0; i < encrypted.length(); i++) {
-			builder.append(getCharFromAscii(getDecryptedCharAscii(encrypted.charAt(i))));
+			builder.append(getDecryptedChar(encrypted.charAt(i)));
 		}
+		encrypted = builder.toString();
 		return builder.toString();
 	}
 	
 	private String encrypt(String password) {
 		StringBuilder builder = new StringBuilder();
 		for(int i = 0; i < password.length(); i++) {
-			System.out.println("Encrypted char " + password.charAt(i) + " to --> char " + getCharFromAscii(getEncryptedCharAscii(password.charAt(i))));
-			builder.append(getCharFromAscii(getEncryptedCharAscii(password.charAt(i))));
+			builder.append(getEncryptedChar(password.charAt(i)));
 		}
 		encrypted = builder.toString();
 		return builder.toString();
 	}
 	
-	private char getCharFromAscii(int number) {
-		return (char) number;
+	private char getEncryptedChar(char toEncrypt) {
+		int ascii = (int) toEncrypt;
+		int encryptedAscii = ascii - numberKey; //TODO : IT WILL MAYBE FAIL IF WE IMPLEMENT THE DATABASE
+		return (char) encryptedAscii;
 	}
 	
-	private int getEncryptedCharAscii(char character) {
-		return ((int) character) - numberKey;
-	}
-	
-	private int getDecryptedCharAscii(char character) {
-		return ((int) character) + numberKey;
+	private char getDecryptedChar(char toDecrypt) {
+		int ascii = (int) toDecrypt;
+		int decryptedAscii = ascii + numberKey; //TODO : IT WILL MAYBE FAIL IF WE IMPLEMENT THE DATABASE
+		return (char) decryptedAscii;
 	}
 }

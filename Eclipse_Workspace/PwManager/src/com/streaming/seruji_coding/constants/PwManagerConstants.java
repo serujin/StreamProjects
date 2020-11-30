@@ -1,8 +1,8 @@
 package com.streaming.seruji_coding.constants;
 
 public class PwManagerConstants {
-	public static final int PW_LENGTH = 100;
 	public static final int ASCII_MIN = 33;
+	public static final int ASCII_MAX = 254;
 	
 	public static final String[] INVALID_STRINGS = {"", "null"};
 	
@@ -30,6 +30,9 @@ public class PwManagerConstants {
 	
 	public static final String LOGIN_USER_MSG = "Introduce your username";
 	public static final String LOGIN_PASS_MSG = "Introduce your password";
+	
+	public static final String DB_PASSWORD = "awdxcapp123asddawdWADs_wdas___awda";
+	public static final String DB_CONNECT = "jdbc:postgresql:/res/";
 	
 	private PwManagerConstants() {}
 
